@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <script language="c#" runat="server">
 
-    static string BaseWellcomUrl = @"http://192.168.100.228/DashingDAM/api/Dam/";    
+    static string BaseWellcomUrl = @"http://192.168.100.228/WellcomDam/api/WellcomProduct/";    
     
     [WebMethod]
     public static string SearchProducts(string description,string code, string gtin,int batch,int batchSize)

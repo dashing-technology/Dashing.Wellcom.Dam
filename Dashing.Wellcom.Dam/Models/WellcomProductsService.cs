@@ -29,8 +29,10 @@ namespace Dashing.Wellcom.Dam.Models
 
             //var qualVal = System.Uri.EscapeDataString($"descr={desc},code={code},gtin={gtin}");
             string qualVal = "";
-            if (!string.IsNullOrEmpty(desc))
-                qualVal += "descr=" + desc + ",";
+            
+
+            //if (!string.IsNullOrEmpty(desc))
+            //    qualVal += "descr=" + desc + ",";
             if (!string.IsNullOrEmpty(code))
                 qualVal += "code=" + code + ",";
             if (!string.IsNullOrEmpty(gtin))
@@ -38,8 +40,16 @@ namespace Dashing.Wellcom.Dam.Models
             if (qualVal.EndsWith(","))
                 qualVal = qualVal.Remove(qualVal.Length - 1);
 
+
             qualVal = System.Uri.EscapeDataString(qualVal);
-            HttpResponseMessage response = client.GetAsync($"Product.json?signature={signature}&account={_account}&timestamp={timestamp}&qualifier={qualVal}&batch={batch}&batchSize={batchSize}").Result;  // Blocking call!
+            string requestString =
+                $"Product.json?signature={signature}&account={_account}&timestamp={timestamp}&qualifier={qualVal}&batch={batch}&batchSize={batchSize}";
+            if (!string.IsNullOrEmpty(desc))
+            {
+                requestString += "&searchVal=" + System.Uri.EscapeDataString(desc);
+            }
+
+            HttpResponseMessage response = client.GetAsync(requestString).Result;  // Blocking call!
             var searchResult = response.Content.ReadAsStringAsync().Result;
             IEnumerable<WellcomProduct> products = new List<WellcomProduct>();
             if (response.IsSuccessStatusCode)
