@@ -22,8 +22,16 @@ namespace Dashing.Wellcom.Dam.Controllers
             _wellcomProductsService = wellcomProductsService;
         }
 
+        /// <summary>
+        /// Search Product by Description, Code, Barcode, Batch and BatchSize for Pagination
+        /// </summary>
+        /// <param name="desc"></param>
+        /// <param name="code"></param>
+        /// <param name="gtin"></param>
+        /// <param name="batch"></param>
+        /// <param name="batchSize"></param>
+        /// <returns></returns>
         [HttpGet]
-
         [Route("SearchProducts")]
         //public IHttpActionResult SearchProducts(string desc = "\"SAMBUCOL Immuno Forte Liquid 250mL\"", string code = "\"9314807043551\"", string gtin="",int batch=0,int batchSize=10)
         public IHttpActionResult SearchProducts(string desc = "", string code = "", string gtin = "", int batch = 0,
@@ -34,6 +42,11 @@ namespace Dashing.Wellcom.Dam.Controllers
             return Ok(products.Where(p => p.HeroMedia != null).ToList());
         }
 
+        /// <summary>
+        /// This method is to Search Product by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetProduct")]
         public IHttpActionResult GetProduct([Required]string id)
