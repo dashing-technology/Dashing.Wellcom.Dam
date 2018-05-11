@@ -43,5 +43,7 @@ namespace Dashing.Wellcom.Dam.Models
         public string OriginalFilename { get; set; }
         public string Uuid { get; set; }
         public string Thumb { get; set; }
+        public string Full { get; set; }
+        public string Original { get; set; }
     }
 }
