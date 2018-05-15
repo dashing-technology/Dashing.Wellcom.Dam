@@ -39,7 +39,7 @@ namespace Dashing.Wellcom.Dam.Controllers
         {
 
             var products = _wellcomProductsService.SearchProdcucts(desc, code, gtin, batch, batchSize);
-            return Ok(products.Where(p => p.HeroMedia != null).ToList());
+            return Ok(products.ToList());
         }
 
         /// <summary>
